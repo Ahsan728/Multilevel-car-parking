@@ -1,0 +1,32 @@
+#include <Keypad.h>
+
+const byte ROWS = 8; //four rows
+const byte COLS = 8; //four columns
+//define the cymbols on the buttons of the keypads
+char hexaKeys[ROWS][COLS] = {
+{'1','2','3','A','E','I','M','Q'},
+{'4','5','6','B','F','J','N','R'},
+{'7','8','9','C','G','K','O','S'},
+{'*','0','#','D','H','L','P','T'},
+{'U','Y','c','g','k','o','s','w'},
+{'V','Z','d','h','l','p','t','x'},
+{'W','a','e','i','m','q','u','y'},
+{'X','b','f','j','n','r','v','z'}
+};
+byte rowPins[ROWS] = {69, 68, 67, 66,61, 60, 59, 58}; //connect to the row pinouts of the keypad
+byte colPins[COLS] = {65, 64, 63, 62,57, 56, 55, 54}; //connect to the column pinouts of the keypad
+
+//initialize an instance of class NewKeypad
+Keypad customKeypad = Keypad( makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS); 
+
+void setup(){
+  Serial.begin(9600);
+}
+  
+void loop(){
+  char customKey = customKeypad.getKey();
+  
+  if (customKey){
+    Serial.println(customKey);
+  }
+}
